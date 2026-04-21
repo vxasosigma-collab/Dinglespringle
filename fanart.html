@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fan Art – DinglePringle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        background: #0d0d0d;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        width: 100%;
+        background: #111;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        border-bottom: 2px solid #00ffcc;
+    }
+
+    .navbar a {
+        color: #00ffcc;
+        text-decoration: none;
+        font-size: 20px;
+        transition: 0.2s;
+    }
+
+    .navbar a:hover {
+        color: white;
+        text-shadow: 0 0 10px #00ffcc;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 50px;
+        color: #00ffcc;
+    }
+
+    .upload-box {
+        width: 90%;
+        max-width: 600px;
+        margin: 30px auto;
+        background: #111;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #00ffcc;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 6px;
+        border: none;
+        outline: none;
+        background: #222;
+        color: white;
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background: #00ffcc;
+        border: none;
+        border-radius: 6px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #00e6b8;
+        box-shadow: 0 0 15px #00ffcc;
+    }
+
+    .gallery {
+        width: 90%;
+        max-width: 900px;
+        margin: 40px auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .art-card {
+        background: #111;
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px solid #00ffcc;
+        text-align: center;
+    }
+
+    .art-card img {
+        width: 100%;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="fanart.html">Fan Art</a>
+</div>
+
+<h1>Fan Art</h1>
+
+<div class="upload-box">
+    <input id="fanName" placeholder="Your Name">
+    <textarea id="fanCaption" placeholder="Caption"></textarea>
+    <input type="file" id="fanImage" accept="image/*">
+    <button onclick="uploadFanArt()">Upload</button>
+</div>
+
+<div class="gallery" id="gallery"></div>
+
+<script>
+function uploadFanArt() {
+    let name = document.getElementById("fanName").value;
+    let caption = document.getElementById("fanCaption").value;
+    let file = document.getElementById("fanImage").files[0];
+
+    if (!name || !caption || !file) return alert("Fill everything");
+
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        let list = JSON.parse(localStorage.getItem("fanart") || "[]");
+
+        list.push({
+            name,
+            caption,
+            image: e.target.result
+        });
+
+        localStorage.setItem("fanart", JSON.stringify(list));
+        loadFanArt();
+    };
+
+    reader.readAsDataURL(file);
+}
+
+function loadFanArt() {
+    let list = JSON.parse(localStorage.getItem("fanart") || "[]");
+    let box = document.getElementById("gallery");
+
+    box.innerHTML = "";
+
+    list.forEach(a => {
+        box.innerHTML += `
+            <div class="art-card">
+                <img src="${a.image}">
+                <strong>${a.name}</strong><br>
+                ${a.caption}
+            </div>
+        `;
+    });
+}
+
+loadFanArt();
+</script>
+
+</body>
+</html>
