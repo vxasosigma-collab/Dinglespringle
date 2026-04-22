@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DingleVR Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #050509;
+      --bg2: #101018;
+      --accent: #ff4747;
+      --mint: #a6f2c1;
+      --text: #f9f9ff;
+      --muted: #a0a3b8;
+      --border: #262637;
+      --radius-pill: 999px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #191927 0, #050509 55%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* TOP BAR */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pfp {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--mint);
+    }
+
+    .pfp img { width: 100%; height: 100%; object-fit: cover; }
+
+    .brand-text-main {
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .brand-text-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .top-right {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn, .discord-btn {
+      padding: 14px 26px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: rgba(10,10,16,0.9);
+      color: var(--text);
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+
+    .nav-btn:hover, .discord-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(166,242,193,0.25);
+    }
+
+    /* HERO TEXT */
+    .hero-layout {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, var(--accent), var(--mint));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      margin: 14px auto 22px;
+      max-width: 440px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 14px 26px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, var(--accent), var(--mint));
+      color: #050509;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+      font-size: 16px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(255,71,71,0.35);
+    }
+
+    .btn-ghost {
+      padding: 14px 26px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(166,242,193,0.4);
+      background: rgba(10,16,14,0.9);
+      color: var(--mint);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+      font-size: 16px;
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(166,242,193,0.25);
+    }
+
+    /* BOTTOM BUTTONS */
+    .bottom-buttons {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 0 20px;
+    }
+
+    .bottom-btn {
+      padding: 16px 30px;
+      border-radius: var(--radius-pill);
+      background: rgba(10,16,14,0.9);
+      border: 1px solid rgba(166,242,193,0.4);
+      color: var(--mint);
+      font-size: 17px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+
+    .bottom-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(166,242,193,0.35);
+    }
+
+    /* VIDEO TRAIN */
+    .video-section {
+      margin-top: 40px;
+      padding: 20px;
+    }
+
+    .video-title-main {
+      text-align: center;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .video-rail {
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(166,242,193,0.4);
+      background: rgba(5,5,12,0.9);
+      padding: 14px 0;
+      position: relative;
+    }
+
+    .video-track {
+      display: flex;
+      gap: 14px;
+      padding-left: 14px;
+      cursor: grab;
+      transition: transform 0.2s linear;
+    }
+
+    .video-card {
+      min-width: 220px;
+      max-width: 220px;
+      background: #14141f;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(166,242,193,0.3);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      flex-shrink: 0;
+      transition: 0.2s;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .video-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 14px 30px rgba(166,242,193,0.35);
+    }
+
+    .video-thumb {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .video-body {
+      padding: 8px 10px 10px;
+    }
+
+    .video-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .video-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* NOTIFICATION */
+    .notify {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f1115;
+      border: 2px solid var(--mint);
+      padding: 18px 22px;
+      border-radius: 14px;
+      box-shadow: 0 0 20px rgba(166,242,193,0.35);
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      z-index: 999;
+      opacity: 0;
+      transition: 0.6s ease;
+    }
+
+    .notify.show {
+      opacity: 1;
+    }
+
+    .notify.hide {
+      opacity: 0;
+    }
+
+    .notify-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--mint);
+    }
+
+    .notify-buttons {
+      margin-top: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      text-align: center;
+      font-style: italic;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NOTIFICATION -->
+  <div class="notify" id="notify">
+    <div class="notify-title">WAIT — Dingle just published a new banger!!!!</div>
+    <div class="notify-buttons">
+      <a href="https://www.youtube.com/@RealDingleVR/shorts" class="btn-ghost" target="_blank">Latest Shortform</a>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="pfp">
+        <img src="https://i.postimg.cc/p9tPMHpM/Screenshot-2026-04-16-225727.png" alt="Profile">
+      </div>
+      <div>
+        <div class="brand-text-main">DingleVR</div>
+        <div class="brand-text-sub">VR chaos • Gorilla Tag • ideas from you</div>
+      </div>
+    </div>
+
+    <div class="top-right">
+      <a href="https://discord.gg/GsH9bCX7Sf" class="discord-btn">Discord</a>
+      <a href="suggestions.html" class="nav-btn">Post Ideas</a>
+      <a href="fanart.html" class="nav-btn">Fan Art</a>
+      <a href="https://forms.gle/AZtjtETGguNAjQmY6" class="nav-btn">Mod Apps</a>
+      <a href="https://discord.com/users/1383832168802816100" class="nav-btn">A lil creds ;)</a>
+    </div>
+  </header>
+
+  <!-- HERO TEXT -->
+  <section class="hero-layout">
+    <h1 class="hero-title">All of <span>DingleVR</span> in one place.</h1>
+    <p class="hero-sub">New uploads, VR chaos, and your video ideas all in one spot.</p>
+
+    <div class="hero-buttons">
+      <a href="https://www.youtube.com/@RealDingleVR">
+        <button class="btn-primary">Watch</button>
+      </a>
+
+      <a href="https://www.youtube.com/@RealDingleVR/shorts">
+        <button class="btn-ghost">Shorts</button>
+      </a>
+    </div>
+  </section>
+
+  <!-- BOTTOM BUTTONS -->
+  <div class="bottom-buttons">
+    <a href="https://www.youtube.com/@RealDingleVR" class="bottom-btn">Full Channel</a>
+    <a href="https://www.youtube.com/@RealDingleVR/shorts" class="bottom-btn">Latest Shorts</a>
+    <a href="https://www.youtube.com/@RealDingleVR/videos" class="bottom-btn">All Videos</a>
+    <a href="https://discord.gg/GsH9bCX7Sf" class="bottom-btn">Join Discord</a>
+  </div>
+
+  <!-- SHORTS SLIDER -->
+  <section class="video-section">
+    <div class="video-title-main">Latest DingleVR Shorts</div>
+
+    <div class="video-rail">
+      <div class="video-track" id="videoTrack"></div>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    Thx, this is peak — DingleVR
+  </div>
+
+  <script>
+    const track = document.getElementById("videoTrack");
+
+    // YOUR REAL SHORT IDS
+    const shorts = [
+      "XDWMaBt-PyM",
+      "kBVp4Ot__is",
+      "D7fbkFBaMy4",
+      "x8-w0THZ8Mc",
+      "EcbZL61DVj0",
+      "fOhJ0zUiwLU"
+    ];
+
+    function buildCards() {
+      let html = "";
+      shorts.forEach(id => {
+        html += `
+          <a class="video-card" href="https://www.youtube.com/shorts/${id}" target="_blank">
+            <img class="video-thumb" src="https://i.ytimg.com/vi/${id}/hq720.jpg">
+            <div class="video-body">
+              <div class="video-title">Short</div>
+              <div class="video-meta">YouTube</div>
+            </div>
+          </a>
+        `;
+      });
+
+      track.innerHTML = html + html; // duplicate for infinite loop
+    }
+
+    buildCards();
+
+    /* AUTO SLIDE + DRAG */
+    let pos = 0;
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    function autoSlide() {
+      if (!isDown) {
+        pos -= 0.6;
+        track.style.transform = `translateX(${pos}px)`;
+        if (Math.abs(pos) > track.scrollWidth / 2) pos = 0;
+      }
+      requestAnimationFrame(autoSlide);
+    }
+    autoSlide();
+
+    track.addEventListener("mousedown", e => {
+      isDown = true;
+      track.style.cursor = "grabbing";
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = pos;
+    });
+
+    track.addEventListener("mouseleave", () => {
+      isDown = false;
+      track.style.cursor = "grab";
+    });
+
+    track.addEventListener("mouseup", () => {
+      isDown = false;
+      track.style.cursor = "grab";
+    });
+
+    track.addEventListener("mousemove", e => {
+      if (!isDown) return;
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      pos = scrollLeft + walk;
+    });
+
+    // Touch support
+    track.addEventListener("touchstart", e => {
+      isDown = true;
+      startX = e.touches[0].pageX - track.offsetLeft;
+      scrollLeft = pos;
+    });
+
+    track.addEventListener("touchend", () => {
+      isDown = false;
+    });
+
+    track.addEventListener("touchmove", e => {
+      if (!isDown) return;
+      const x = e.touches[0].pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      pos = scrollLeft + walk;
+    });
+
+    // Notification: show → wait 4s → hide
+    setTimeout(() => {
+      const n = document.getElementById("notify");
+      n.classList.add("show");
+
+      setTimeout(() => {
+        n.classList.remove("show");
+      }, 4000);
+
+    }, 800);
+  </script>
+
+</body>
+</html>
