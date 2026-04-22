@@ -80,17 +80,12 @@
       align-items: center;
       gap: 6px;
       transition: 0.2s;
+      text-decoration: none;
     }
 
     .nav-btn:hover, .discord-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(166,242,193,0.25);
-    }
-
-    .btn-icon {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
     }
 
     /* HERO TEXT */
@@ -231,6 +226,8 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.6);
       flex-shrink: 0;
       transition: 0.2s;
+      text-decoration: none;
+      color: var(--text);
     }
 
     .video-card:hover {
@@ -313,7 +310,7 @@
     <a href="https://discord.gg/GsH9bCX7Sf" class="bottom-btn">Join Discord</a>
   </div>
 
-  <!-- REAL SHORTS SLIDER -->
+  <!-- SHORTS SLIDER -->
   <section class="video-section">
     <div class="video-title-main">Latest DingleVR Shorts</div>
 
@@ -329,34 +326,34 @@
   <script>
     const track = document.getElementById("videoTrack");
 
-    // DingleVR Shorts playlist
-    const playlistId = "UUmW8sELpAo-VP5NdVs4KJ1A";
+    // Your Shorts IDs
+    const shorts = [
+      "kBVp4Ot__is",
+      "nyJoLvAD1C4",
+      "vcsZSdvl2l4",
+      "4eHbYAdvKE4",
+      "x8-w0THZ8Mc",
+      "FZAsLeiLUeA"
+    ];
 
-    // Fetch playlist page HTML (no CORS block)
-    fetch(`https://cors.isomorphic-git.org/https://www.youtube.com/playlist?list=${playlistId}`)
-      .then(res => res.text())
-      .then(html => {
-        const videoIds = [...html.matchAll(/"videoId":"(.*?)"/g)].map(m => m[1]);
-
-        let cards = "";
-
-        videoIds.slice(0, 12).forEach(id => {
-          const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
-          const link = `https://www.youtube.com/watch?v=${id}`;
-
-          cards += `
-            <a class="video-card" href="${link}" target="_blank">
-              <img class="video-thumb" src="${thumb}">
-              <div class="video-body">
-                <div class="video-title">Short</div>
-                <div class="video-meta">YouTube</div>
-              </div>
-            </a>
-          `;
-        });
-
-        track.innerHTML = cards + cards; // duplicate for infinite loop
+    function buildCards() {
+      let html = "";
+      shorts.forEach(id => {
+        html += `
+          <a class="video-card" href="https://www.youtube.com/watch?v=${id}" target="_blank">
+            <img class="video-thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg">
+            <div class="video-body">
+              <div class="video-title">Short</div>
+              <div class="video-meta">YouTube</div>
+            </div>
+          </a>
+        `;
       });
+
+      track.innerHTML = html + html; // duplicate for infinite loop
+    }
+
+    buildCards();
 
     /* AUTO SLIDE + DRAG */
     let pos = 0;
