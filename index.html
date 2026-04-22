@@ -1,418 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>DingleVR Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <style>
+<meta charset="UTF-8">
+<title>DinglePringle – Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
     :root {
-      --bg: #050509;
-      --bg2: #101018;
-      --accent: #ff4747;
-      --mint: #a6f2c1;
-      --text: #f9f9ff;
-      --muted: #a0a3b8;
-      --border: #262637;
-      --radius-pill: 999px;
+        --bg: #050608;
+        --panel: #0f1115;
+        --accent: #00ffcc;
+        --accent-soft: #00e6b8;
+        --text: #ffffff;
+        --muted: #aaaaaa;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+        box-sizing: border-box;
+    }
 
     body {
-      font-family: system-ui, sans-serif;
-      background: radial-gradient(circle at top, #191927 0, #050509 55%);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: radial-gradient(circle at top, #101820 0, #050608 45%, #000000 100%);
+        color: var(--text);
+        min-height: 100vh;
     }
 
-    /* TOP BAR */
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
+    .navbar {
+        width: 100%;
+        background: #050608cc;
+        backdrop-filter: blur(10px);
+        padding: 15px 30px;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        border-bottom: 2px solid var(--accent);
+        position: sticky;
+        top: 0;
+        z-index: 20;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .navbar a {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.2s;
     }
 
-    .pfp {
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid var(--mint);
+    .navbar a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 10px var(--accent);
     }
 
-    .pfp img { width: 100%; height: 100%; object-fit: cover; }
-
-    .brand-text-main {
-      font-size: 20px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .brand-text-sub {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .top-right {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .nav-btn, .discord-btn {
-      padding: 14px 26px;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border);
-      background: rgba(10,10,16,0.9);
-      color: var(--text);
-      font-size: 15px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: 0.2s;
-      text-decoration: none;
-    }
-
-    .nav-btn:hover, .discord-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(166,242,193,0.25);
-    }
-
-    /* HERO TEXT */
-    .hero-layout {
-      padding: 40px 20px;
-      text-align: center;
+    .hero {
+        text-align: center;
+        padding: 60px 20px 30px;
     }
 
     .hero-title {
-      font-size: 44px;
-      font-weight: 800;
-      line-height: 1.1;
-    }
-
-    .hero-title span {
-      background: linear-gradient(120deg, var(--accent), var(--mint));
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+        font-size: 56px;
+        margin: 0 0 10px;
+        color: var(--accent);
+        text-shadow: 0 0 20px #00ffcc55;
     }
 
     .hero-sub {
-      color: var(--muted);
-      margin: 14px auto 22px;
-      max-width: 440px;
+        font-size: 20px;
+        color: var(--muted);
+        max-width: 600px;
+        margin: 0 auto 30px;
     }
 
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
+    .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--accent);
+        margin-bottom: 10px;
+    }
+
+    .pill-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #00ff66;
+        box-shadow: 0 0 8px #00ff66;
+    }
+
+    .banner {
+        max-width: 900px;
+        margin: 0 auto 40px;
+        background: linear-gradient(135deg, #111827, #020617);
+        border-radius: 18px;
+        border: 2px solid var(--accent);
+        padding: 20px 20px 24px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .banner-glow {
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(circle at top left, #00ffcc22, transparent 60%);
+        pointer-events: none;
+    }
+
+    .banner-inner {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1;
+    }
+
+    .banner-left {
+        text-align: left;
+        max-width: 520px;
+    }
+
+    .banner-tag {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--accent);
+        margin-bottom: 6px;
+    }
+
+    .banner-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    .banner-sub {
+        font-size: 14px;
+        color: var(--muted);
+    }
+
+    .banner-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .btn {
+        border-radius: 999px;
+        padding: 10px 18px;
+        font-size: 14px;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: 0.18s;
     }
 
     .btn-primary {
-      padding: 14px 26px;
-      border-radius: var(--radius-pill);
-      background: linear-gradient(135deg, var(--accent), var(--mint));
-      color: #050509;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: 0.2s;
-      font-size: 16px;
+        background: var(--accent);
+        color: #000;
+        box-shadow: 0 0 16px #00ffcc66;
     }
 
     .btn-primary:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 10px 25px rgba(255,71,71,0.35);
+        background: var(--accent-soft);
+        box-shadow: 0 0 22px #00ffccaa;
+        transform: translateY(-1px);
     }
 
     .btn-ghost {
-      padding: 14px 26px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(166,242,193,0.4);
-      background: rgba(10,16,14,0.9);
-      color: var(--mint);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: 0.2s;
-      font-size: 16px;
+        background: transparent;
+        color: var(--accent);
+        border: 1px solid var(--accent);
     }
 
     .btn-ghost:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(166,242,193,0.25);
+        background: #00ffcc11;
+        box-shadow: 0 0 12px #00ffcc55;
+        transform: translateY(-1px);
     }
 
-    /* BOTTOM BUTTONS */
-    .bottom-buttons {
-      margin-top: 40px;
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      padding: 0 20px;
+    .btn span.arrow {
+        font-size: 16px;
     }
 
-    .bottom-btn {
-      padding: 16px 30px;
-      border-radius: var(--radius-pill);
-      background: rgba(10,16,14,0.9);
-      border: 1px solid rgba(166,242,193,0.4);
-      color: var(--mint);
-      font-size: 17px;
-      cursor: pointer;
-      transition: 0.2s;
-      text-decoration: none;
+    .section {
+        max-width: 1100px;
+        margin: 0 auto 40px;
+        padding: 0 20px;
     }
 
-    .bottom-btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(166,242,193,0.35);
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 16px;
     }
 
-    /* VIDEO TRAIN */
-    .video-section {
-      margin-top: 40px;
-      padding: 20px;
+    .section-title {
+        font-size: 26px;
+        color: var(--accent);
     }
 
-    .video-title-main {
-      text-align: center;
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 20px;
+    .section-sub {
+        font-size: 14px;
+        color: var(--muted);
     }
 
-    .video-rail {
-      overflow: hidden;
-      border-radius: 20px;
-      border: 1px solid rgba(166,242,193,0.4);
-      background: rgba(5,5,12,0.9);
-      padding: 14px 0;
-      position: relative;
+    .qa-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+        max-height: 520px;
+        overflow-y: auto;
+        padding-right: 4px;
     }
 
-    .video-track {
-      display: flex;
-      gap: 14px;
-      padding-left: 14px;
-      cursor: grab;
-      transition: transform 0.2s linear;
+    .qa-item {
+        background: var(--panel);
+        border-radius: 10px;
+        border: 1px solid #1f2933;
+        padding: 10px 12px;
+        cursor: pointer;
+        transition: 0.15s;
     }
 
-    .video-card {
-      min-width: 220px;
-      max-width: 220px;
-      background: #14141f;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(166,242,193,0.3);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-      flex-shrink: 0;
-      transition: 0.2s;
-      text-decoration: none;
-      color: var(--text);
+    .qa-item:hover {
+        border-color: var(--accent);
+        box-shadow: 0 0 12px #00ffcc33;
     }
 
-    .video-card:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 14px 30px rgba(166,242,193,0.35);
+    .qa-question-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
     }
 
-    .video-thumb {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
+    .qa-question {
+        font-size: 14px;
+        font-weight: 600;
     }
 
-    .video-body {
-      padding: 8px 10px 10px;
+    .qa-meta {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 4px;
     }
 
-    .video-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 4px;
+    .qa-answer {
+        font-size: 13px;
+        color: #d1d5db;
+        margin-top: 6px;
+        display: none;
     }
 
-    .video-meta {
-      font-size: 11px;
-      color: var(--muted);
+    .qa-item.open .qa-answer {
+        display: block;
     }
 
-    .footer-note {
-      margin-top: 40px;
-      text-align: center;
-      font-style: italic;
-      color: var(--muted);
+    .qa-item.open .qa-toggle {
+        transform: rotate(90deg);
     }
-  </style>
+
+    .qa-toggle {
+        font-size: 18px;
+        color: var(--accent);
+        transition: 0.15s;
+        flex-shrink: 0;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 12px;
+        color: var(--muted);
+        border-top: 1px solid #111827;
+        margin-top: 30px;
+    }
+
+    .link-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .link-chip {
+        font-size: 13px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid #1f2933;
+        color: var(--muted);
+        text-decoration: none;
+        transition: 0.15s;
+    }
+
+    .link-chip:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        box-shadow: 0 0 10px #00ffcc33;
+    }
+
+    @media (min-width: 800px) {
+        .qa-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+</style>
 </head>
 <body>
 
-  <!-- TOP BAR -->
-  <header class="top-bar">
-    <div class="brand">
-      <div class="pfp">
-        <img src="https://i.postimg.cc/p9tPMHpM/Screenshot-2026-04-16-225727.png" alt="Profile">
-      </div>
-      <div>
-        <div class="brand-text-main">DingleVR</div>
-        <div class="brand-text-sub">VR chaos • Gorilla Tag • ideas from you</div>
-      </div>
+<div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="fanart.html">Fan Art</a>
+</div>
+
+<div class="hero">
+    <div class="pill">
+        <div class="pill-dot"></div>
+        LIVE CHANNEL HUB
     </div>
+    <h1 class="hero-title">DinglePringle Central</h1>
+    <p class="hero-sub">
+        One place for streams, shorts, chaos, and the most unhinged Q&amp;A you’ve ever seen. Pick a lane and dive in.
+    </p>
+</div>
 
-    <div class="top-right">
-      <a href="https://discord.gg/GsH9bCX7Sf" class="discord-btn">Discord</a>
-      <a href="suggestions.html" class="nav-btn">Post Ideas</a>
-      <a href="fanart.html" class="nav-btn">Fan Art</a>
-      <a href="https://forms.gle/AZtjtETGguNAjQmY6" class="nav-btn">Mod Apps</a>
-    </div>
-  </header>
-
-  <!-- HERO TEXT -->
-  <section class="hero-layout">
-    <h1 class="hero-title">All of <span>DingleVR</span> in one place.</h1>
-    <p class="hero-sub">New uploads, VR chaos, and your video ideas all in one spot.</p>
-
-    <div class="hero-buttons">
-      <a href="https://www.youtube.com/@RealDingleVR">
-        <button class="btn-primary">Watch</button>
-      </a>
-
-      <a href="https://www.youtube.com/@RealDingleVR/shorts">
-        <button class="btn-ghost">Shorts</button>
-      </a>
-    </div>
-  </section>
-
-  <!-- BOTTOM BUTTONS -->
-  <div class="bottom-buttons">
-    <a href="https://www.youtube.com/@RealDingleVR" class="bottom-btn">Full Channel</a>
-    <a href="https://www.youtube.com/@RealDingleVR/shorts" class="bottom-btn">Latest Shorts</a>
-    <a href="https://www.youtube.com/@RealDingleVR/videos" class="bottom-btn">All Videos</a>
-    <a href="https://discord.gg/GsH9bCX7Sf" class="bottom-btn">Join Discord</a>
-  </div>
-
-  <!-- SHORTS SLIDER -->
-  <section class="video-section">
-    <div class="video-title-main">Latest DingleVR Shorts</div>
-
-    <div class="video-rail">
-      <div class="video-track" id="videoTrack"></div>
-    </div>
-  </section>
-
-  <div class="footer-note">
-    Thx, this is peak — DingleVR
-  </div>
-
-  <script>
-    const track = document.getElementById("videoTrack");
-
-    // Your Shorts IDs
-    const shorts = [
-      "kBVp4Ot__is",
-      "nyJoLvAD1C4",
-      "vcsZSdvl2l4",
-      "4eHbYAdvKE4",
-      "x8-w0THZ8Mc",
-      "FZAsLeiLUeA"
-    ];
-
-    function buildCards() {
-      let html = "";
-      shorts.forEach(id => {
-        html += `
-          <a class="video-card" href="https://www.youtube.com/watch?v=${id}" target="_blank">
-            <img class="video-thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg">
-            <div class="video-body">
-              <div class="video-title">Short</div>
-              <div class="video-meta">YouTube</div>
+<div class="banner">
+    <div class="banner-glow"></div>
+    <div class="banner-inner">
+        <div class="banner-left">
+            <div class="banner-tag">ALERT</div>
+            <div class="banner-title">WAIT — Dingle just published a new banger!!!!</div>
+            <div class="banner-sub">
+                Choose your flavor: full‑length brain‑rot or rapid‑fire chaos. Either way, you’re not leaving sane.
             </div>
-          </a>
+        </div>
+        <div class="banner-buttons">
+            <button class="btn btn-primary" onclick="scrollToSection('longform')">
+                Latest Longform <span class="arrow">▶</span>
+            </button>
+            <button class="btn btn-ghost" onclick="scrollToSection('shortform')">
+                Latest Shortform <span class="arrow">⚡</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="section" id="longform">
+    <div class="section-header">
+        <div class="section-title">Latest Longform</div>
+        <div class="section-sub">Full episodes, streams, and deep dives into pure nonsense.</div>
+    </div>
+    <div class="link-row">
+        <a class="link-chip" href="#" onclick="alert('Hook this to your latest longform link later.')">
+            Watch the newest full video
+        </a>
+        <a class="link-chip" href="#" onclick="alert('Hook this to your VODs playlist later.')">
+            View all longform uploads
+        </a>
+    </div>
+</div>
+
+<div class="section" id="shortform">
+    <div class="section-header">
+        <div class="section-title">Latest Shortform</div>
+        <div class="section-sub">Clipped chaos, shorts, and the moments that should’ve stayed in the drafts.</div>
+    </div>
+    <div class="link-row">
+        <a class="link-chip" href="#" onclick="alert('Hook this to your shorts playlist later.')">
+            Watch the latest short
+        </a>
+        <a class="link-chip" href="#" onclick="alert('Hook this to your TikTok/shorts hub later.')">
+            View all shortform
+        </a>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <div class="section-title">Q&amp;A Vault</div>
+        <div class="section-sub">200 questions. Zero filters. Click any question to reveal the answer.</div>
+    </div>
+    <div class="qa-grid" id="qaGrid">
+        <!-- Q&A items injected by JS -->
+    </div>
+</div>
+
+<div class="footer">
+    DinglePringle &copy; <span id="year"></span> • Powered by chaos, mint green, and questionable decisions.
+</div>
+
+<script>
+const qaData = [];
+
+// Generate 200 Q&A entries
+for (let i = 1; i <= 200; i++) {
+    qaData.push({
+        q: `Q${i}. What is DinglePringle doing in episode #${i}?`,
+        a: `In episode #${i}, DinglePringle is probably overreacting to something minor, turning it into peak cinema, and dragging chat along for the ride.`
+    });
+}
+
+function renderQA() {
+    const grid = document.getElementById('qaGrid');
+    grid.innerHTML = '';
+    qaData.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'qa-item';
+        div.innerHTML = `
+            <div class="qa-question-row">
+                <div class="qa-question">${item.q}</div>
+                <div class="qa-toggle">▶</div>
+            </div>
+            <div class="qa-meta">Entry #${index + 1} • Q&A Vault</div>
+            <div class="qa-answer">${item.a}</div>
         `;
-      });
-
-      track.innerHTML = html + html; // duplicate for infinite loop
-    }
-
-    buildCards();
-
-    /* AUTO SLIDE + DRAG */
-    let pos = 0;
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    function autoSlide() {
-      if (!isDown) {
-        pos -= 0.6;
-        track.style.transform = `translateX(${pos}px)`;
-        if (Math.abs(pos) > track.scrollWidth / 2) pos = 0;
-      }
-      requestAnimationFrame(autoSlide);
-    }
-    autoSlide();
-
-    track.addEventListener("mousedown", e => {
-      isDown = true;
-      track.style.cursor = "grabbing";
-      startX = e.pageX - track.offsetLeft;
-      scrollLeft = pos;
+        div.addEventListener('click', () => {
+            div.classList.toggle('open');
+        });
+        grid.appendChild(div);
     });
+}
 
-    track.addEventListener("mouseleave", () => {
-      isDown = false;
-      track.style.cursor = "grab";
-    });
+function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
-    track.addEventListener("mouseup", () => {
-      isDown = false;
-      track.style.cursor = "grab";
-    });
-
-    track.addEventListener("mousemove", e => {
-      if (!isDown) return;
-      const x = e.pageX - track.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      pos = scrollLeft + walk;
-    });
-
-    // Touch support
-    track.addEventListener("touchstart", e => {
-      isDown = true;
-      startX = e.touches[0].pageX - track.offsetLeft;
-      scrollLeft = pos;
-    });
-
-    track.addEventListener("touchend", () => {
-      isDown = false;
-    });
-
-    track.addEventListener("touchmove", e => {
-      if (!isDown) return;
-      const x = e.touches[0].pageX - track.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      pos = scrollLeft + walk;
-    });
-  </script>
+document.getElementById('year').textContent = new Date().getFullYear();
+renderQA();
+</script>
 
 </body>
 </html>
