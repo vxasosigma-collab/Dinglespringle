@@ -1,272 +1,354 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>DinglePringle – Home</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>DingleVR Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-:root {
-    --bg: #050608;
-    --panel: #0f1115;
-    --accent: #00ffcc;
-    --text: #ffffff;
-    --muted: #aaaaaa;
-}
+  <style>
+    :root {
+      --bg: #050509;
+      --bg2: #101018;
+      --accent: #ff4747;
+      --mint: #a6f2c1;
+      --text: #f9f9ff;
+      --muted: #a0a3b8;
+      --border: #262637;
+      --radius-pill: 999px;
+    }
 
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: Arial, sans-serif;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* NAVBAR */
-.navbar {
-    width: 100%;
-    background: #050608cc;
-    backdrop-filter: blur(10px);
-    padding: 15px 30px;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    border-bottom: 2px solid var(--accent);
-    position: sticky;
-    top: 0;
-    z-index: 20;
-}
+    body {
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #191927 0, #050509 55%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-.navbar a {
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+    /* TOP BAR */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
 
-/* HERO */
-.hero {
-    text-align: center;
-    padding: 60px 20px 30px;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-.hero-title {
-    font-size: 56px;
-    color: var(--accent);
-    text-shadow: 0 0 20px #00ffcc55;
-}
+    .pfp {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--mint);
+    }
 
-.hero-sub {
-    font-size: 20px;
-    color: var(--muted);
-    max-width: 600px;
-    margin: 0 auto;
-}
+    .pfp img { width: 100%; height: 100%; object-fit: cover; }
 
-/* BANNER */
-.banner {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #0b0d10;
-    border-radius: 18px;
-    border: 2px solid var(--accent);
-    padding: 20px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
+    .brand-text-main {
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
 
-.banner img {
-    width: 110px;
-    height: 110px;
-    border-radius: 14px;
-    border: 2px solid var(--accent);
-    object-fit: cover;
-}
+    .brand-text-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
 
-.banner-text {
-    flex: 1;
-}
+    .top-right {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-.banner-title {
-    font-size: 22px;
-    font-weight: bold;
-}
+    .nav-btn, .discord-btn {
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: rgba(10,10,16,0.9);
+      color: var(--text);
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
 
-.banner-sub {
-    font-size: 14px;
-    color: var(--muted);
-}
+    .nav-btn:hover, .discord-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(166,242,193,0.25);
+    }
 
-/* NOTIFICATION POPUP */
-.notify {
-    position: fixed;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #0f1115;
-    border: 2px solid var(--accent);
-    padding: 18px 22px;
-    border-radius: 14px;
-    box-shadow: 0 0 20px #00ffcc55;
-    width: 90%;
-    max-width: 600px;
-    text-align: center;
-    z-index: 999;
-    opacity: 0;
-    transition: 0.6s ease;
-}
+    .btn-icon {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
 
-.notify.show {
-    top: 20px;
-    opacity: 1;
-}
+    /* HERO TEXT */
+    .hero-layout {
+      padding: 40px 20px;
+      text-align: center;
+    }
 
-.notify-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--accent);
-}
+    .hero-title {
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
 
-.notify-buttons {
-    margin-top: 12px;
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-}
+    .hero-title span {
+      background: linear-gradient(120deg, var(--accent), var(--mint));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
 
-.btn {
-    padding: 10px 18px;
-    border-radius: 999px;
-    border: 1px solid var(--accent);
-    background: transparent;
-    color: var(--accent);
-    cursor: pointer;
-    transition: 0.2s;
-}
+    .hero-sub {
+      color: var(--muted);
+      margin: 14px auto 22px;
+      max-width: 440px;
+    }
 
-.btn:hover {
-    background: var(--accent);
-    color: #000;
-}
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-/* Q&A GRID */
-.qa-section {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
+    .btn-primary {
+      padding: 11px 22px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, var(--accent), var(--mint));
+      color: #050509;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
 
-.qa-title {
-    font-size: 26px;
-    color: var(--accent);
-    margin-bottom: 10px;
-}
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(255,71,71,0.35);
+    }
 
-.qa-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 12px;
-}
+    .btn-ghost {
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(166,242,193,0.4);
+      background: rgba(10,16,14,0.9);
+      color: var(--mint);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
 
-.qa-item {
-    background: var(--panel);
-    border: 1px solid #1f2933;
-    padding: 12px;
-    border-radius: 10px;
-    cursor: pointer;
-}
+    .btn-ghost:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(166,242,193,0.25);
+    }
 
-.qa-item:hover {
-    border-color: var(--accent);
-}
+    /* VIDEO TRAIN */
+    .video-section {
+      margin-top: 40px;
+      padding: 20px;
+    }
 
-.qa-answer {
-    display: none;
-    margin-top: 6px;
-    color: var(--muted);
-}
+    .video-title-main {
+      text-align: center;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
 
-/* FOOTER */
-.footer {
-    text-align: center;
-    padding: 20px;
-    color: var(--muted);
-}
-</style>
+    .video-rail {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(166,242,193,0.4);
+      background: rgba(5,5,12,0.9);
+      padding: 14px 0;
+    }
+
+    .video-track {
+      display: flex;
+      gap: 14px;
+      will-change: transform;
+      animation: videoSlide 30s linear infinite;
+    }
+
+    @keyframes videoSlide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .video-card {
+      min-width: 220px;
+      max-width: 220px;
+      background: #14141f;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(166,242,193,0.3);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      flex-shrink: 0;
+      transition: 0.2s;
+    }
+
+    .video-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 14px 30px rgba(166,242,193,0.35);
+    }
+
+    .video-thumb {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .video-body {
+      padding: 8px 10px 10px;
+    }
+
+    .video-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .video-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      text-align: center;
+      font-style: italic;
+      color: var(--muted);
+    }
+  </style>
 </head>
 <body>
 
-<!-- NOTIFICATION -->
-<div class="notify" id="notify">
-    <div class="notify-title">WAIT — Dingle just published a new banger!!!!</div>
-    <div class="notify-buttons">
-        <button class="btn" onclick="scrollToSection('longform')">Latest Longform</button>
-        <button class="btn" onclick="scrollToSection('qa')">Latest Shortform</button>
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="pfp">
+        <img src="https://i.postimg.cc/p9tPMHpM/Screenshot-2026-04-16-225727.png" alt="Profile">
+      </div>
+      <div>
+        <div class="brand-text-main">DingleVR</div>
+        <div class="brand-text-sub">VR chaos • Gorilla Tag • ideas from you</div>
+      </div>
     </div>
-</div>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <a href="index.html">Home</a>
-    <a href="suggestions.html">Suggestions</a>
-    <a href="fanart.html">Fan Art</a>
-</div>
+    <div class="top-right">
+      <a href="https://discord.gg/GsH9bCX7Sf" class="discord-btn">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M20 4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v14l4-4h10a2 2 0 0 0 2-2V4z"/></svg>
+        Discord
+      </a>
 
-<!-- HERO -->
-<div class="hero">
-    <h1 class="hero-title">DinglePringle Central</h1>
-    <p class="hero-sub">One place for streams, shorts, chaos, and the most unhinged Q&A you’ve ever seen.</p>
-</div>
+      <a href="suggestions.html" class="nav-btn">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>
+        Post Ideas
+      </a>
 
-<!-- BANNER -->
-<div class="banner" id="longform">
-    <img src="https://i.postimg.cc/p9tPMHpM/Screenshot-2026-04-16-225727.png">
-    <div class="banner-text">
-        <div class="banner-title">WAIT — Dingle just published a new banger!!!!</div>
-        <div class="banner-sub">Choose your flavor: full‑length chaos or rapid‑fire insanity.</div>
+      <a href="fanart.html" class="nav-btn">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M21 19V5a2 2 0 0 0-2-2H5C3.9 3 3 3.9 3 5v14l4-4 4 4 4-4 4 4z"/></svg>
+        Fan Art
+      </a>
+
+      <a href="https://forms.gle/AZtjtETGguNAjQmY6" class="nav-btn">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 2l4 4h-3v6h-2V6H8l4-4z"/></svg>
+        Mod Apps
+      </a>
     </div>
-</div>
+  </header>
 
-<!-- Q&A -->
-<div class="qa-section" id="qa">
-    <div class="qa-title">Q&A Vault</div>
-    <div class="qa-grid" id="qaGrid"></div>
-</div>
+  <!-- HERO TEXT -->
+  <section class="hero-layout">
+    <h1 class="hero-title">All of <span>DingleVR</span> in one place.</h1>
+    <p class="hero-sub">New uploads, VR chaos, and your video ideas all in one spot.</p>
 
-<!-- FOOTER -->
-<div class="footer">
-    DinglePringle © <span id="year"></span>
-</div>
+    <div class="hero-buttons">
+      <a href="https://www.youtube.com/@RealDingleVR">
+        <button class="btn-primary">
+          <svg class="btn-icon" viewBox="0 0 24 24"><path d="M10 15l5-3-5-3v6z"/></svg>
+          Watch
+        </button>
+      </a>
 
-<script>
-// Show notification
-setTimeout(() => {
-    document.getElementById("notify").classList.add("show");
-}, 800);
+      <a href="https://www.youtube.com/@RealDingleVR/shorts">
+        <button class="btn-ghost">
+          <svg class="btn-icon" viewBox="0 0 24 24"><path d="M7 4h10v16H7z"/></svg>
+          Shorts
+        </button>
+      </a>
+    </div>
+  </section>
 
-// Generate 200 Q&A
-const qaGrid = document.getElementById("qaGrid");
-for (let i = 1; i <= 200; i++) {
-    const div = document.createElement("div");
-    div.className = "qa-item";
-    div.innerHTML = `
-        <div class="qa-question">Q${i}. What is Dingle doing in episode #${i}?</div>
-        <div class="qa-answer">Probably causing chaos and dragging chat with him.</div>
-    `;
-    div.onclick = () => {
-        const ans = div.querySelector(".qa-answer");
-        ans.style.display = ans.style.display === "block" ? "none" : "block";
-    };
-    qaGrid.appendChild(div);
-}
+  <!-- REAL VIDEO TRAIN -->
+  <section class="video-section">
+    <div class="video-title-main">Latest from DingleVR</div>
 
-function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-}
+    <div class="video-rail">
+      <div class="video-track" id="videoTrack">
+        <!-- Videos injected here -->
+      </div>
+    </div>
+  </section>
 
-document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+  <div class="footer-note">
+    Thx, this is peak — DingleVR
+  </div>
+
+  <script>
+    const channelId = "UCmW8sELpAo-VP5NdVs4KJ1A";
+    const videoTrack = document.getElementById("videoTrack");
+
+    fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`)
+      .then(res => res.text())
+      .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+      .then(data => {
+        const entries = data.getElementsByTagName("entry");
+
+        let html = "";
+
+        for (let i = 0; i < entries.length; i++) {
+          const title = entries[i].getElementsByTagName("title")[0].textContent;
+          const link = entries[i].getElementsByTagName("link")[0].getAttribute("href");
+          const videoId = link.split("v=")[1];
+          const thumb = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+
+          html += `
+            <a class="video-card" href="${link}" target="_blank">
+              <img class="video-thumb" src="${thumb}">
+              <div class="video-body">
+                <div class="video-title">${title}</div>
+                <div class="video-meta">YouTube</div>
+              </div>
+            </a>
+          `;
+        }
+
+        // Duplicate for infinite loop
+        videoTrack.innerHTML = html + html;
+      });
+  </script>
 
 </body>
 </html>
