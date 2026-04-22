@@ -4,447 +4,330 @@
 <meta charset="UTF-8">
 <title>DinglePringle – Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-    :root {
-        --bg: #050608;
-        --panel: #0f1115;
-        --accent: #00ffcc;
-        --accent-soft: #00e6b8;
-        --text: #ffffff;
-        --muted: #aaaaaa;
-    }
+/* ========================= */
+/*        THEME COLORS       */
+/* ========================= */
+:root {
+    --green: #00ff44;
+    --green-soft: #00e63a;
+    --green-glow: #00ff4455;
+    --bg: #050505;
+    --panel: #0c0c0c;
+    --text: #ffffff;
+    --muted: #bbbbbb;
+}
 
-    * {
-        box-sizing: border-box;
-    }
+/* ========================= */
+/*        GLOBAL STYLE       */
+/* ========================= */
+body {
+    margin: 0;
+    background: #000;
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
 
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: radial-gradient(circle at top, #101820 0, #050608 45%, #000000 100%);
-        color: var(--text);
-        min-height: 100vh;
-    }
+/* ========================= */
+/*        NAVBAR             */
+/* ========================= */
+.navbar {
+    width: 100%;
+    padding: 15px 30px;
+    background: #000000cc;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    border-bottom: 2px solid var(--green);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
 
-    .navbar {
-        width: 100%;
-        background: #050608cc;
-        backdrop-filter: blur(10px);
-        padding: 15px 30px;
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        border-bottom: 2px solid var(--accent);
-        position: sticky;
-        top: 0;
-        z-index: 20;
-    }
+.navbar a {
+    color: var(--green);
+    text-decoration: none;
+    font-size: 18px;
+    letter-spacing: 1px;
+    transition: 0.2s;
+}
 
-    .navbar a {
-        color: var(--accent);
-        text-decoration: none;
-        font-size: 18px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: 0.2s;
-    }
+.navbar a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px var(--green);
+}
 
-    .navbar a:hover {
-        color: #ffffff;
-        text-shadow: 0 0 10px var(--accent);
-    }
+/* ========================= */
+/*        HERO SECTION       */
+/* ========================= */
+.hero {
+    text-align: center;
+    padding: 60px 20px 30px;
+}
 
-    .hero {
-        text-align: center;
-        padding: 60px 20px 30px;
-    }
+.hero-title {
+    font-size: 56px;
+    color: var(--green);
+    text-shadow: 0 0 20px var(--green-glow);
+}
 
-    .hero-title {
-        font-size: 56px;
-        margin: 0 0 10px;
-        color: var(--accent);
-        text-shadow: 0 0 20px #00ffcc55;
-    }
+.hero-sub {
+    font-size: 20px;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 10px auto 0;
+}
 
-    .hero-sub {
-        font-size: 20px;
-        color: var(--muted);
-        max-width: 600px;
-        margin: 0 auto 30px;
-    }
+/* ========================= */
+/*   TOP-CENTER NOTIFICATION */
+/* ========================= */
+.notify {
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f0f0f;
+    border: 2px solid var(--green);
+    padding: 18px 22px;
+    border-radius: 14px;
+    box-shadow: 0 0 20px var(--green-glow);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    z-index: 999;
+    opacity: 0;
+    transition: 0.6s ease;
+}
 
-    .pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 14px;
-        border-radius: 999px;
-        border: 1px solid var(--accent);
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--accent);
-        margin-bottom: 10px;
-    }
+.notify.show {
+    top: 20px;
+    opacity: 1;
+}
 
-    .pill-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #00ff66;
-        box-shadow: 0 0 8px #00ff66;
-    }
+.notify-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--green);
+}
 
-    .banner {
-        max-width: 900px;
-        margin: 0 auto 40px;
-        background: linear-gradient(135deg, #111827, #020617);
-        border-radius: 18px;
-        border: 2px solid var(--accent);
-        padding: 20px 20px 24px;
-        position: relative;
-        overflow: hidden;
-    }
+.notify-buttons {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
 
-    .banner-glow {
-        position: absolute;
-        inset: -40%;
-        background: radial-gradient(circle at top left, #00ffcc22, transparent 60%);
-        pointer-events: none;
-    }
+.btn {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--green);
+    background: transparent;
+    color: var(--green);
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+}
 
-    .banner-inner {
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 18px;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 1;
-    }
+.btn:hover {
+    background: var(--green);
+    color: #000;
+    box-shadow: 0 0 15px var(--green-glow);
+}
 
-    .banner-left {
-        text-align: left;
-        max-width: 520px;
-    }
+/* ========================= */
+/*     SHORTS SLIDER         */
+/* ========================= */
+.shorts-section {
+    margin: 60px auto;
+    max-width: 1100px;
+    padding: 0 20px;
+}
 
-    .banner-tag {
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--accent);
-        margin-bottom: 6px;
-    }
+.section-title {
+    font-size: 28px;
+    color: var(--green);
+    margin-bottom: 10px;
+}
 
-    .banner-title {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 4px;
-    }
+.shorts-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scroll-behavior: smooth;
+}
 
-    .banner-sub {
-        font-size: 14px;
-        color: var(--muted);
-    }
+.shorts-slider::-webkit-scrollbar {
+    height: 8px;
+}
 
-    .banner-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
+.shorts-slider::-webkit-scrollbar-thumb {
+    background: var(--green);
+    border-radius: 10px;
+}
 
-    .btn {
-        border-radius: 999px;
-        padding: 10px 18px;
-        font-size: 14px;
-        border: none;
-        cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        transition: 0.18s;
-    }
+.short-card {
+    min-width: 180px;
+    background: var(--panel);
+    border: 1px solid #111;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-    .btn-primary {
-        background: var(--accent);
-        color: #000;
-        box-shadow: 0 0 16px #00ffcc66;
-    }
+.short-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 15px var(--green-glow);
+}
 
-    .btn-primary:hover {
-        background: var(--accent-soft);
-        box-shadow: 0 0 22px #00ffccaa;
-        transform: translateY(-1px);
-    }
+.short-thumb {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
 
-    .btn-ghost {
-        background: transparent;
-        color: var(--accent);
-        border: 1px solid var(--accent);
-    }
+/* ========================= */
+/*   Q&A NOTIFICATION PANEL  */
+/* ========================= */
+.qa-panel {
+    margin: 60px auto;
+    max-width: 900px;
+    background: #0b0b0b;
+    border: 2px solid var(--green);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 0 20px var(--green-glow);
+}
 
-    .btn-ghost:hover {
-        background: #00ffcc11;
-        box-shadow: 0 0 12px #00ffcc55;
-        transform: translateY(-1px);
-    }
+.qa-title {
+    font-size: 24px;
+    color: var(--green);
+    margin-bottom: 10px;
+}
 
-    .btn span.arrow {
-        font-size: 16px;
-    }
+.qa-item {
+    background: #111;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #1a1a1a;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-    .section {
-        max-width: 1100px;
-        margin: 0 auto 40px;
-        padding: 0 20px;
-    }
+.qa-item:hover {
+    border-color: var(--green);
+    box-shadow: 0 0 10px var(--green-glow);
+}
 
-    .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 10px;
-        margin-bottom: 16px;
-    }
+.qa-answer {
+    display: none;
+    margin-top: 6px;
+    color: var(--muted);
+}
 
-    .section-title {
-        font-size: 26px;
-        color: var(--accent);
-    }
-
-    .section-sub {
-        font-size: 14px;
-        color: var(--muted);
-    }
-
-    .qa-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 10px;
-        max-height: 520px;
-        overflow-y: auto;
-        padding-right: 4px;
-    }
-
-    .qa-item {
-        background: var(--panel);
-        border-radius: 10px;
-        border: 1px solid #1f2933;
-        padding: 10px 12px;
-        cursor: pointer;
-        transition: 0.15s;
-    }
-
-    .qa-item:hover {
-        border-color: var(--accent);
-        box-shadow: 0 0 12px #00ffcc33;
-    }
-
-    .qa-question-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .qa-question {
-        font-size: 14px;
-        font-weight: 600;
-    }
-
-    .qa-meta {
-        font-size: 11px;
-        color: var(--muted);
-        margin-top: 4px;
-    }
-
-    .qa-answer {
-        font-size: 13px;
-        color: #d1d5db;
-        margin-top: 6px;
-        display: none;
-    }
-
-    .qa-item.open .qa-answer {
-        display: block;
-    }
-
-    .qa-item.open .qa-toggle {
-        transform: rotate(90deg);
-    }
-
-    .qa-toggle {
-        font-size: 18px;
-        color: var(--accent);
-        transition: 0.15s;
-        flex-shrink: 0;
-    }
-
-    .footer {
-        text-align: center;
-        padding: 20px;
-        font-size: 12px;
-        color: var(--muted);
-        border-top: 1px solid #111827;
-        margin-top: 30px;
-    }
-
-    .link-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    .link-chip {
-        font-size: 13px;
-        padding: 6px 10px;
-        border-radius: 999px;
-        border: 1px solid #1f2933;
-        color: var(--muted);
-        text-decoration: none;
-        transition: 0.15s;
-    }
-
-    .link-chip:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-        box-shadow: 0 0 10px #00ffcc33;
-    }
-
-    @media (min-width: 800px) {
-        .qa-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-    }
+/* ========================= */
+/*         FOOTER            */
+/* ========================= */
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--muted);
+    margin-top: 40px;
+}
 </style>
 </head>
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
     <a href="index.html">Home</a>
     <a href="suggestions.html">Suggestions</a>
     <a href="fanart.html">Fan Art</a>
 </div>
 
+<!-- NOTIFICATION POPUP -->
+<div class="notify" id="notify">
+    <div class="notify-title">WAIT — Dingle just dropped a new banger!</div>
+    <div class="notify-buttons">
+        <button class="btn" onclick="scrollToSection('longform')">Longform</button>
+        <button class="btn" onclick="scrollToSection('shorts')">Shortform</button>
+    </div>
+</div>
+
+<!-- HERO -->
 <div class="hero">
-    <div class="pill">
-        <div class="pill-dot"></div>
-        LIVE CHANNEL HUB
-    </div>
     <h1 class="hero-title">DinglePringle Central</h1>
-    <p class="hero-sub">
-        One place for streams, shorts, chaos, and the most unhinged Q&amp;A you’ve ever seen. Pick a lane and dive in.
-    </p>
+    <p class="hero-sub">Streams, shorts, chaos, and the most unhinged Q&A on the internet.</p>
 </div>
 
-<div class="banner">
-    <div class="banner-glow"></div>
-    <div class="banner-inner">
-        <div class="banner-left">
-            <div class="banner-tag">ALERT</div>
-            <div class="banner-title">WAIT — Dingle just published a new banger!!!!</div>
-            <div class="banner-sub">
-                Choose your flavor: full‑length brain‑rot or rapid‑fire chaos. Either way, you’re not leaving sane.
-            </div>
-        </div>
-        <div class="banner-buttons">
-            <button class="btn btn-primary" onclick="scrollToSection('longform')">
-                Latest Longform <span class="arrow">▶</span>
-            </button>
-            <button class="btn btn-ghost" onclick="scrollToSection('shortform')">
-                Latest Shortform <span class="arrow">⚡</span>
-            </button>
-        </div>
-    </div>
-</div>
+<!-- SHORTS SLIDER -->
+<div class="shorts-section" id="shorts">
+    <div class="section-title">Latest Shorts</div>
+    <div class="shorts-slider">
+        <!-- AUTO GENERATED SHORTS -->
+        <script>
+            const shorts = [
+                "XDWMaBt-PyM",
+                "kBVp4Ot__is",
+                "D7fbkFBaMy4",
+                "x8-w0THZ8Mc",
+                "EcbZL61DVj0",
+                "fOhJ0zUiwLU"
+            ];
 
-<div class="section" id="longform">
-    <div class="section-header">
-        <div class="section-title">Latest Longform</div>
-        <div class="section-sub">Full episodes, streams, and deep dives into pure nonsense.</div>
-    </div>
-    <div class="link-row">
-        <a class="link-chip" href="#" onclick="alert('Hook this to your latest longform link later.')">
-            Watch the newest full video
-        </a>
-        <a class="link-chip" href="#" onclick="alert('Hook this to your VODs playlist later.')">
-            View all longform uploads
-        </a>
+            document.write(shorts.map(id => `
+                <div class="short-card" onclick="window.open('https://youtube.com/shorts/${id}', '_blank')">
+                    <img class="short-thumb" src="https://i.ytimg.com/vi/${id}/hq720.jpg">
+                </div>
+            `).join(""));
+        </script>
     </div>
 </div>
 
-<div class="section" id="shortform">
-    <div class="section-header">
-        <div class="section-title">Latest Shortform</div>
-        <div class="section-sub">Clipped chaos, shorts, and the moments that should’ve stayed in the drafts.</div>
-    </div>
-    <div class="link-row">
-        <a class="link-chip" href="#" onclick="alert('Hook this to your shorts playlist later.')">
-            Watch the latest short
-        </a>
-        <a class="link-chip" href="#" onclick="alert('Hook this to your TikTok/shorts hub later.')">
-            View all shortform
-        </a>
-    </div>
+<!-- Q&A PANEL -->
+<div class="qa-panel">
+    <div class="qa-title">Q&A Notifications</div>
+    <div id="qaList"></div>
 </div>
 
-<div class="section">
-    <div class="section-header">
-        <div class="section-title">Q&amp;A Vault</div>
-        <div class="section-sub">200 questions. Zero filters. Click any question to reveal the answer.</div>
-    </div>
-    <div class="qa-grid" id="qaGrid">
-        <!-- Q&A items injected by JS -->
-    </div>
-</div>
-
+<!-- FOOTER -->
 <div class="footer">
-    DinglePringle &copy; <span id="year"></span> • Powered by chaos, mint green, and questionable decisions.
+    DinglePringle © <span id="year"></span>
 </div>
 
 <script>
-const qaData = [];
+// Show notification popup
+setTimeout(() => {
+    document.getElementById("notify").classList.add("show");
+}, 800);
 
-// Generate 200 Q&A entries
-for (let i = 1; i <= 200; i++) {
-    qaData.push({
-        q: `Q${i}. What is DinglePringle doing in episode #${i}?`,
-        a: `In episode #${i}, DinglePringle is probably overreacting to something minor, turning it into peak cinema, and dragging chat along for the ride.`
-    });
+// Q&A generator
+const qaList = document.getElementById("qaList");
+for (let i = 1; i <= 20; i++) {
+    const div = document.createElement("div");
+    div.className = "qa-item";
+    div.innerHTML = `
+        <div class="qa-question">Q${i}. What is Dingle doing in episode #${i}?</div>
+        <div class="qa-answer">Probably causing chaos and dragging chat with him.</div>
+    `;
+    div.onclick = () => {
+        const ans = div.querySelector(".qa-answer");
+        ans.style.display = ans.style.display === "block" ? "none" : "block";
+    };
+    qaList.appendChild(div);
 }
 
-function renderQA() {
-    const grid = document.getElementById('qaGrid');
-    grid.innerHTML = '';
-    qaData.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = 'qa-item';
-        div.innerHTML = `
-            <div class="qa-question-row">
-                <div class="qa-question">${item.q}</div>
-                <div class="qa-toggle">▶</div>
-            </div>
-            <div class="qa-meta">Entry #${index + 1} • Q&A Vault</div>
-            <div class="qa-answer">${item.a}</div>
-        `;
-        div.addEventListener('click', () => {
-            div.classList.toggle('open');
-        });
-        grid.appendChild(div);
-    });
-}
-
+// Scroll helper
 function scrollToSection(id) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
 }
 
-document.getElementById('year').textContent = new Date().getFullYear();
-renderQA();
+document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 </body>
