@@ -256,45 +256,6 @@
       color: var(--muted);
     }
 
-    /* Q&A */
-    .qa-section {
-      margin-top: 40px;
-      padding: 20px;
-    }
-
-    .qa-title {
-      text-align: center;
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .qa-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
-    }
-
-    .qa-item {
-      background: #14141f;
-      border-radius: 14px;
-      padding: 14px;
-      border: 1px solid rgba(166,242,193,0.3);
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .qa-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(166,242,193,0.35);
-    }
-
-    .qa-answer {
-      display: none;
-      margin-top: 6px;
-      color: var(--muted);
-    }
-
     /* NOTIFICATION */
     .notify {
       position: fixed;
@@ -346,7 +307,6 @@
     <div class="notify-title">WAIT — Dingle just published a new banger!!!!</div>
     <div class="notify-buttons">
       <a href="#videoTrack" class="btn-ghost">Latest Shortform</a>
-      <a href="#qa" class="btn-ghost">Q&A</a>
     </div>
   </div>
 
@@ -368,7 +328,7 @@
       <a href="fanart.html" class="nav-btn">Fan Art</a>
       <a href="https://forms.gle/AZtjtETGguNAjQmY6" class="nav-btn">Mod Apps</a>
 
-      <!-- NEW CREDS BUTTON -->
+      <!-- CREDS BUTTON -->
       <a href="https://discord.com/users/1383832168802816100" class="nav-btn">A lil creds ;)</a>
     </div>
   </header>
@@ -404,12 +364,6 @@
     <div class="video-rail">
       <div class="video-track" id="videoTrack"></div>
     </div>
-  </section>
-
-  <!-- Q&A -->
-  <section class="qa-section" id="qa">
-    <div class="qa-title">Q&A Vault</div>
-    <div class="qa-grid" id="qaGrid"></div>
   </section>
 
   <div class="footer-note">
@@ -505,22 +459,6 @@
       const walk = (x - startX) * 1.5;
       pos = scrollLeft + walk;
     });
-
-    // Q&A
-    const qaGrid = document.getElementById("qaGrid");
-    for (let i = 1; i <= 200; i++) {
-      const div = document.createElement("div");
-      div.className = "qa-item";
-      div.innerHTML = `
-        <div class="qa-question">Q${i}. What is Dingle doing in episode #${i}?</div>
-        <div class="qa-answer">Probably causing chaos and dragging chat with him.</div>
-      `;
-      div.onclick = () => {
-        const ans = div.querySelector(".qa-answer");
-        ans.style.display = ans.style.display === "block" ? "none" : "block";
-      };
-      qaGrid.appendChild(div);
-    }
 
     // Notification
     setTimeout(() => {
