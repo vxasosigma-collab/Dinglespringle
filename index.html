@@ -19,6 +19,10 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: system-ui, sans-serif;
       background: radial-gradient(circle at top, #191927 0, #050509 55%);
@@ -279,6 +283,10 @@
       opacity: 1;
     }
 
+    .notify.hide {
+      opacity: 0;
+    }
+
     .notify-title {
       font-size: 20px;
       font-weight: bold;
@@ -327,8 +335,6 @@
       <a href="suggestions.html" class="nav-btn">Post Ideas</a>
       <a href="fanart.html" class="nav-btn">Fan Art</a>
       <a href="https://forms.gle/AZtjtETGguNAjQmY6" class="nav-btn">Mod Apps</a>
-
-      <!-- CREDS BUTTON -->
       <a href="https://discord.com/users/1383832168802816100" class="nav-btn">A lil creds ;)</a>
     </div>
   </header>
@@ -358,7 +364,7 @@
   </div>
 
   <!-- SHORTS SLIDER -->
-  <section class="video-section">
+  <section class="video-section" id="shorts">
     <div class="video-title-main">Latest DingleVR Shorts</div>
 
     <div class="video-rail">
@@ -460,9 +466,15 @@
       pos = scrollLeft + walk;
     });
 
-    // Notification
+    // Notification: show → wait 4s → hide
     setTimeout(() => {
-      document.getElementById("notify").classList.add("show");
+      const n = document.getElementById("notify");
+      n.classList.add("show");
+
+      setTimeout(() => {
+        n.classList.remove("show");
+      }, 4000);
+
     }, 800);
   </script>
 
